@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+
+  web: 
+    build: .  #ruta del docker file
+    image: alpine-phyton:2.0
+    ports: 
+      - 5000:5000
+    environment:
+      MSG: ${MSG_CONTAINER}
+    volumes:
+      - .:/app #<Path from host>:<Path to the internal container to mount>
+
+  db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+    volumes: #Set volumes for container
+      - data:/var/lib/mysql #<Name of volume>:<Path to the internal container to mount>
+
+volumes: #to define the volume
+  data: #name of the volume
+    driver: local #type of the driver

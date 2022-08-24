@@ -1,0 +1,46 @@
+
+#Para correr una imagen
+docker run --rm -d -p 5000:5000 -e MSG='FRANK' --name  vibora-alpina alpine-python:1.4
+
+--rm = se eliminan cuando se detiene con el comando docker stop
+-d = que lo ejecute el daemon process
+-p = puerto expuesto externo: puerto expuesto interno
+-e = Definicion de variables de entorno
+--name = define un nombre del contenedor mas humano para identificar
+<imagen>:<tag> = recibe la imagen construida + tag identificatorio
+
+#Para construir una imagen
+docker build -t <ImageName>:<tag>  <pathToDockerfile>
+
+#Para descargar imagen
+docker pull <ImageName>:<tag>
+
+#Para ver imagenes
+docker image ls
+
+#Para ver contenedores ejecutados
+docker ps -a
+
+#Para detener contenedor
+docker stop <IDDocker>
+docker stop <NameDocker>
+
+#Para ejecutar comando interno en una imagen corriendo
+docker exec -it <ImageName> <CMD>       
+
+Docker-compose commands
+
+#Para saber cual version esta del kit
+docker-compose -v
+
+#Para construir imagen
+docker-compose up -d --build
+-d = run background
+--build = any change in Dockerfile, build the image again
+
+#Para ejecutar un comando dentro del contenedor
+docker-compose run <serviceName> <comando>
+
+#Para bajar la imagen del proceso
+docker-compose down
+
