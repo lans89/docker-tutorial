@@ -1,5 +1,12 @@
 version: "3"
 services:
+  db-raven:
+    image: ravendb/ravendb:ubuntu-latest
+    restart: always
+    ports:
+      - 4000:8080
+    volumes:
+      - database-raven:/opt/RavenDB/config
   db-postgres-server:
     image: postgres:13.7-alpine3.16
     restart: always
@@ -45,6 +52,8 @@ services:
       ME_CONFIG_BASICAUTH_PASSWORD: iorbix
       ME_CONFIG_MONGODB_URL: mongodb://${DB_USER}:${DB_PASS}@db-mongo-server:27017/
 volumes:
+  database-raven:
+    driver: local
   database-postgres:
     driver: local
   database-mysql:
